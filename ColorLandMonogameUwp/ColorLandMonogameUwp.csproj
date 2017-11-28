@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{5FED7D44-BB7A-4C07-8932-667D1505201E}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ColorLandMonogameUwp</RootNamespace>
+    <AssemblyName>ColorLandMonogameUwp</AssemblyName>
+    <DefaultLanguage>pt-BR</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>ColorLandMonogameUwp_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <MonoGamePlatform>WindowsStoreApp</MonoGamePlatform>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\WindowsUniversal\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UAP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\WindowsUniversal\MonoGame.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\base\Background.cs" />
+    <Compile Include="Common\base\Button.cs" />
+    <Compile Include="Common\base\Cursor.cs" />
+    <Compile Include="Common\base\GameObject.cs" />
+    <Compile Include="Common\base\GameObjectsGroup.cs" />
+    <Compile Include="Common\base\MenuGrade.cs" />
+    <Compile Include="Common\base\ObjectSerialization.cs" />
+    <Compile Include="Common\base\OptionComponent.cs" />
+    <Compile Include="Common\base\PaperObject.cs" />
+    <Compile Include="Common\base\ProgressObject.cs" />
+    <Compile Include="Common\base\Sprite.cs" />
+    <Compile Include="Common\game\BaseEnemy.cs" />
+    <Compile Include="Common\game\Collectable.cs" />
+    <Compile Include="Common\game\ColorChoiceBar.cs" />
+    <Compile Include="Common\game\enemies\BalloonsManager.cs" />
+    <Compile Include="Common\game\enemies\EnemiesManager.cs" />
+    <Compile Include="Common\game\enemies\Explosion.cs" />
+    <Compile Include="Common\game\enemies\ExplosionManager.cs" />
+    <Compile Include="Common\game\enemies\world1\Bako.cs" />
+    <Compile Include="Common\game\enemies\world1\Balloon.cs" />
+    <Compile Include="Common\game\enemies\world1\EnemyCrabCrab.cs" />
+    <Compile Include="Common\game\enemies\world1\EnemyMongo.cs" />
+    <Compile Include="Common\game\enemies\world1\Kakto.cs" />
+    <Compile Include="Common\game\enemies\world1\Kaktos.cs" />
+    <Compile Include="Common\game\enemies\world1\Lizardo.cs" />
+    <Compile Include="Common\game\enemies\world1\Rock.cs" />
+    <Compile Include="Common\game\enemies\world1\Rocker.cs" />
+    <Compile Include="Common\game\EnemyArc.cs" />
+    <Compile Include="Common\game\EnemySimpleFlying.cs" />
+    <Compile Include="Common\game\EnemySimpleShooting.cs" />
+    <Compile Include="Common\game\EnemySimpleWalking.cs" />
+    <Compile Include="Common\game\hud\HUD.cs" />
+    <Compile Include="Common\game\MainCharacter.cs" />
+    <Compile Include="Common\game\MainCharacterData.cs" />
+    <Compile Include="Common\game\Tracer.cs" />
+    <Compile Include="Common\managers\EnemyManager.cs" />
+    <Compile Include="Common\managers\InputState.cs" />
+    <Compile Include="Common\managers\JoystickManager.cs" />
+    <Compile Include="Common\managers\KeyboardManager.cs" />
+    <Compile Include="Common\managers\KinectManager.cs" />
+    <Compile Include="Common\managers\RockManager.cs" />
+    <Compile Include="Common\managers\ScreenManager.cs" />
+    <Compile Include="Common\managers\SoundManager.cs" />
+    <Compile Include="Common\screens\BaseScreen.cs" />
+    <Compile Include="Common\screens\EndingScreen.cs" />
+    <Compile Include="Common\screens\gameover\GameoverScreen.cs" />
+    <Compile Include="Common\screens\GamePlayScreen.cs" />
+    <Compile Include="Common\screens\LoadingScreen.cs" />
+    <Compile Include="Common\screens\LogosScreen.cs" />
+    <Compile Include="Common\screens\macromap\MacromapPlayer.cs" />
+    <Compile Include="Common\screens\macromap\MacroMapScreen.cs" />
+    <Compile Include="Common\screens\macromap\MacromapShip.cs" />
+    <Compile Include="Common\screens\MainMenuScreen.cs" />
+    <Compile Include="Common\screens\mainmenu\SoundIcon.cs" />
+    <Compile Include="Common\screens\MemoryGameScreen.cs" />
+    <Compile Include="Common\screens\menu\CreditsScreen.cs" />
+    <Compile Include="Common\screens\menu\HelpScreen.cs" />
+    <Compile Include="Common\screens\menu\SettingsScreen.cs" />
+    <Compile Include="Common\screens\PauseScreen.cs" />
+    <Compile Include="Common\screens\selection\SelectableCharacter.cs" />
+    <Compile Include="Common\screens\selection\SelectionScreen.cs" />
+    <Compile Include="Common\screens\SplashScreen.cs" />
+    <Compile Include="Common\screens\StoryScreen.cs" />
+    <Compile Include="Common\util\Camera.cs" />
+    <Compile Include="Common\util\ExtraFunctions.cs" />
+    <Compile Include="Common\util\Fade.cs" />
+    <Compile Include="Common\util\Timer.cs" />
+    <Compile Include="GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="ColorLandMonogameUwp_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="GamePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.0.2</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
