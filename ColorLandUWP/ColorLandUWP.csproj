@@ -206,7 +206,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MonoGame\MonoGame.Framework\MonoGame.Framework.WindowsUniversal.csproj">
+    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.WindowsUniversal.csproj">
       <Project>{09c41a48-7bf3-4a46-9eb8-ce95b4c27ca9}</Project>
       <Name>MonoGame.Framework.WindowsUniversal</Name>
     </ProjectReference>

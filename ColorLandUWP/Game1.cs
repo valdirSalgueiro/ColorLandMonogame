@@ -141,6 +141,7 @@ namespace ColorLandUWP
             base.Draw(gameTime);
             //set rendering back to the back buffer
             GraphicsDevice.SetRenderTarget(null);
+            GraphicsDevice.Clear(Color.Black);
 
             //render target to back buffer
             spriteBatch.Begin();
