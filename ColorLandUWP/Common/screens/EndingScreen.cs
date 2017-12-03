@@ -1,4 +1,5 @@
 ﻿using ColorLandUWP;
+using ColorLandUWP.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -22,7 +23,7 @@ namespace ColorLand
         private MTimer mTimerBlinkText;
 
         private Rectangle mRectangleExhibitionTexture;
-        private MouseState oldStateMouse;
+        private ProxyMouseState oldStateMouse;
         private bool mMousePressing;
         private KeyboardState oldState;
 
@@ -213,22 +214,7 @@ namespace ColorLand
 
         private void updateMouseInput()
         {
-           /*MouseState ms = Mouse.GetState();
-
-            if (ms.LeftButton == ButtonState.Pressed)
-            {
-                // mMousePressing = true;
-                executeFade(mFade, Fade.sFADE_OUT_EFFECT_GRADATIVE);
-                //TODO diminuir volume da musica
-            }
-            else
-            {
-                
-
-                mMousePressing = false;
-            }
-            */
-            MouseState mouseState = Mouse.GetState();
+            var mouseState = Game1.getMousePosition();
 
 
             if (mouseState.LeftButton == ButtonState.Pressed)

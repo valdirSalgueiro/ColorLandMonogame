@@ -1,8 +1,11 @@
 ﻿using ColorLandUWP;
+using ColorLandUWP.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using SharpDXVideoPlayer;
+using System;
 
 namespace ColorLand
 {
@@ -10,7 +13,9 @@ namespace ColorLand
     {
 
         private Video mVideo;
+
         private VideoPlayer mVideoPlayer;
+
         private Texture2D mVideoTexture;
 
         private SpriteBatch mSpriteBatch;
@@ -22,7 +27,7 @@ namespace ColorLand
         private MTimer mTimerBlinkText;
 
         private Rectangle mRectangleExhibitionTexture;
-        private MouseState oldStateMouse;
+        private ProxyMouseState oldStateMouse;
         private bool mMousePressing;
         private KeyboardState oldState;
 
@@ -35,13 +40,16 @@ namespace ColorLand
 
         private Button mButtonSkip;
 
+        private bool crash;
+
         public StoryScreen()
         {
 
             mVideo = Game1.getInstance().getScreenManager().getContent().Load<Video>("story\\videos\\Story");
-            mVideoPlayer = new VideoPlayer();
 
+            mVideoPlayer = new VideoPlayer();
             mVideoPlayer.Play(mVideo);
+
 
             mSpriteBatch = Game1.getInstance().getScreenManager().getSpriteBatch();
 
@@ -61,7 +69,7 @@ namespace ColorLand
             mButtonSkip.loadContent(Game1.getInstance().getScreenManager().getContent());
 
         }
-                
+
 
         private void goToGameScreen()
         {
@@ -140,9 +148,16 @@ namespace ColorLand
 
         public override void draw(GameTime gameTime)
         {
-
-            if (mVideoPlayer.State != MediaState.Stopped)
-                mVideoTexture = mVideoPlayer.GetTexture();
+            try
+            {
+                if (mVideoPlayer.State != MediaState.Stopped && !crash)
+                    mVideoTexture = mVideoPlayer.GetTexture();
+            }
+            catch (Exception)
+            {
+                crash = true;
+                Skip();
+            }
 
             if (mVideoTexture != null)
             {
@@ -150,18 +165,16 @@ namespace ColorLand
                 mSpriteBatch.Draw(mVideoTexture, new Rectangle(0, 0, 800, 600), Color.White);
                 mSpriteBatch.End();
             }
-
-
             if (mShowTextClickToStart && !mClicked)
             {
                 mSpriteBatch.Begin();
-               // mSpriteBatch.Draw(mTextureClickToStart, new Vector2(280, 520), Color.White);
+                // mSpriteBatch.Draw(mTextureClickToStart, new Vector2(280, 520), Color.White);
                 mSpriteBatch.End();
             }
 
             mSpriteBatch.Begin();
             mCursor.draw(mSpriteBatch);
-            
+
             if (mFade != null)
             {
                 mFade.draw(mSpriteBatch);
@@ -169,34 +182,6 @@ namespace ColorLand
 
             mButtonSkip.draw(mSpriteBatch);
             mSpriteBatch.End();
-
-                /*mSpriteBatch.Begin(
-                    SpriteSortMode.Immediate,
-                    BlendState.AlphaBlend,
-                    null,
-                    null,
-                    null,
-                    null,
-                    mCamera.get_transformation(Game1.getInstance().GraphicsDevice));
-
-
-                if (mCurrentTexture != null)
-                {
-                    mSpriteBatch.Draw(mCurrentTexture, mRectangleExhibitionTexture, Color.White);
-                }
-                //mButtonNext.draw(mSpriteBatch);
-                mCursor.draw(mSpriteBatch);
-
-                if (mFade != null)
-                {
-                    mFade.draw(mSpriteBatch);
-                }
-
-
-                mSpriteBatch.End();
-         */
-
-            
         }
 
         public override void handleInput(InputState input)
@@ -218,31 +203,13 @@ namespace ColorLand
 
         private void updateMouseInput()
         {
-           /*MouseState ms = Mouse.GetState();
-
-            if (ms.LeftButton == ButtonState.Pressed)
-            {
-                // mMousePressing = true;
-                executeFade(mFade, Fade.sFADE_OUT_EFFECT_GRADATIVE);
-                //TODO diminuir volume da musica
-            }
-            else
-            {
-                
-
-                mMousePressing = false;
-            }
-            */
-            MouseState mouseState = Mouse.GetState();
-
+            var mouseState = Game1.getMousePosition();
 
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
                 if (oldStateMouse.LeftButton != ButtonState.Pressed)
                 {
-                    mFade = new Fade(this, "fades\\blackfade", Fade.SPEED.FAST);
-                    mClicked = true;
-                    executeFade(mFade, Fade.sFADE_OUT_EFFECT_GRADATIVE);
+                    Skip();
                 }
             }
 
@@ -251,9 +218,23 @@ namespace ColorLand
 
         }
 
+        private void Skip()
+        {
+            try
+            {
+                mVideoPlayer.Stop();
+            }
+            catch (Exception)
+            {
+            }
+            mFade = new Fade(this, "fades\\blackfade", Fade.SPEED.FAST);
+            mClicked = true;
+            executeFade(mFade, Fade.sFADE_OUT_EFFECT_GRADATIVE);
+        }
+
         private void processButtonAction(Button button)
         {
-            
+
             /*if (button == mButtonNext)
             {
                 mFade = new Fade(this, "fades\\blackfade");
@@ -262,7 +243,7 @@ namespace ColorLand
             }*/
 
         }
-        
+
 
         /**************************
          * 
@@ -279,10 +260,12 @@ namespace ColorLand
 
         public override void fadeFinished(Fade fadeObject)
         {
-            if(fadeObject.getEffect() == Fade.sFADE_IN_EFFECT_GRADATIVE){
+            if (fadeObject.getEffect() == Fade.sFADE_IN_EFFECT_GRADATIVE)
+            {
 
                 restartTimer();
-            }else
+            }
+            else
             if (fadeObject.getEffect() == Fade.sFADE_OUT_EFFECT_GRADATIVE)
             {
                 goToGameScreen();

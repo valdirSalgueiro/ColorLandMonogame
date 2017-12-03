@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using ColorLandUWP;
+using ColorLandUWP.Common;
 
 namespace ColorLand
 {
@@ -19,7 +20,7 @@ namespace ColorLand
         private const String cSOUND_HIGHLIGHT = "sound\\fx\\highlight8bit";
         private SpriteBatch mSpriteBatch;
 
-        private MouseState oldStateMouse;
+        private ProxyMouseState oldStateMouse;
 
         //SPLASH
         /*private Texture2D mGamelogo;
@@ -362,7 +363,7 @@ namespace ColorLand
         private void updateMouseInput()
         {
 
-            MouseState ms = Mouse.GetState();
+            var ms = Game1.getMousePosition();
 
             if (ms.LeftButton == ButtonState.Pressed)
             {

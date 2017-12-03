@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -42,7 +43,7 @@ namespace ColorLandUWP
                 //If running on the Xbox, disable the default on screen pointer
                 if (IsXbox())
                 {
-                    Application.Current.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
+                    //Application.Current.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
                 }
             }
         }
@@ -68,6 +69,8 @@ namespace ColorLandUWP
         {
             // By default we want to fill the entire core window.
             ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+            //Windows.UI.Core.CoreWindow.GetForCurrentThread().PointerCursor = null;
+            //Windows.UI.Xaml.Window.Current.CoreWindow.PointerCursor = null;
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)

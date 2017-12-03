@@ -172,9 +172,7 @@ namespace ColorLand
 
         private void updateMouseInput()
         {
-
-
-            MouseState ms = Mouse.GetState();
+            var ms = Game1.getMousePosition();
 
             if (ms.LeftButton == ButtonState.Pressed)
             {

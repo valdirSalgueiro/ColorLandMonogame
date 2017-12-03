@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using ColorLandUWP;
+using ColorLandUWP.Common;
 
 namespace ColorLand
 {
@@ -40,7 +41,7 @@ namespace ColorLand
         private Background mBackgroundImage;
         private Background mCurrentBackground;
 
-        MouseState oldStateMouse;
+        ProxyMouseState oldStateMouse;
 
         private float mAlpha = 1f;
         private bool mReduceAlpha;
@@ -254,7 +255,7 @@ namespace ColorLand
         private void updateMouseInput()
         {
 
-            MouseState ms = Mouse.GetState();
+            var ms = Game1.getMousePosition();
 
             if (ms.LeftButton == ButtonState.Pressed)
             {

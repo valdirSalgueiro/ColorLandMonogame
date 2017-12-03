@@ -137,7 +137,7 @@ namespace ColorLand
 
         private void processMouse()
         {
-            MouseState ms = Mouse.GetState();
+            var ms = Game1.getMousePosition();
 
             if (ms.LeftButton == ButtonState.Pressed)
             {

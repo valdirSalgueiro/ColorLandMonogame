@@ -31048,3 +31048,13 @@
 /processorParam:TextureFormat=Color
 /build:memory/erro.png
 
+#begin story/videos/ENDING_WITH_MUSIC.mp4
+/importer:H264Importer
+/processor:VideoProcessor
+/build:story/videos/ENDING_WITH_MUSIC.mp4
+
+#begin story/videos/Story.mp4
+/importer:H264Importer
+/processor:VideoProcessor
+/build:story/videos/Story.mp4
+

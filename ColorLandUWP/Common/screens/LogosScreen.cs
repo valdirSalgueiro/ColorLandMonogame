@@ -29,11 +29,11 @@ namespace ColorLand
 
         private List<Background> mList = new List<Background>();
 
-        private static DispatcherTimer mTimer;
-
         private const int cMAX_BG_COUNTER = 2;
         private int mBackgroundCounter;
-        
+
+        double timer;
+
 
         public LogosScreen()
         {
@@ -47,12 +47,14 @@ namespace ColorLand
 
             mList.Add(mBackgroundTeamImagineCup);
             mList.Add(mBackgroundTeamLogo);
-            
+
             mCurrentBackground = mList.ElementAt(0);
 
             mFadeIn = new Fade(this, "fades\\blackfade");
-            
-            executeFade(mFadeIn,Fade.sFADE_IN_EFFECT_GRADATIVE);
+
+            executeFade(mFadeIn, Fade.sFADE_IN_EFFECT_GRADATIVE);
+
+            timer = double.MaxValue;
 
         }
 
@@ -67,7 +69,23 @@ namespace ColorLand
             mCurrentBackground.update();
 
             mFadeIn.update(gameTime);
-           
+
+            timer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (timer <= 0)
+            {
+                if (mCurrentFade.getEffect() == Fade.sFADE_IN_EFFECT_GRADATIVE)
+                {
+                    executeFade(mFadeIn, Fade.sFADE_OUT_EFFECT_GRADATIVE);
+                }
+                else
+
+               if (mCurrentFade.getEffect() == Fade.sFADE_OUT_EFFECT_GRADATIVE)
+                {
+                    executeFade(mFadeIn, Fade.sFADE_IN_EFFECT_GRADATIVE);
+                }
+                timer = double.MaxValue;
+            }
+
         }
 
         public override void draw(GameTime gameTime)
@@ -77,7 +95,7 @@ namespace ColorLand
             mCurrentBackground.draw(mSpriteBatch);
 
             mFadeIn.draw(mSpriteBatch);
-            
+
             mSpriteBatch.End();
         }
 
@@ -92,9 +110,11 @@ namespace ColorLand
         ///////prototipo
         public override void fadeFinished(Fade fadeObject)
         {
-            if(fadeObject.getEffect() == Fade.sFADE_IN_EFFECT_GRADATIVE){
+            if (fadeObject.getEffect() == Fade.sFADE_IN_EFFECT_GRADATIVE)
+            {
                 restartTimer(2);
-            }else
+            }
+            else
             if (fadeObject.getEffect() == Fade.sFADE_OUT_EFFECT_GRADATIVE)
             {
                 mBackgroundCounter++;
@@ -109,23 +129,18 @@ namespace ColorLand
                 }
 
             }
-            
+
             //GC.KeepAlive(aTimer);
 
         }
 
         private void restartTimer(int seconds)
         {
-            mTimer = new DispatcherTimer();
-            mTimer.Tick += MTimer_Tick; ;
-            mTimer.Interval = TimeSpan.FromSeconds(seconds);
-            mTimer.Start();
+            timer = seconds * 1000;
         }
 
         private void MTimer_Tick(object sender, object e)
         {
-            mTimer.Stop();
-
             if (mCurrentFade.getEffect() == Fade.sFADE_IN_EFFECT_GRADATIVE)
             {
                 executeFade(mFadeIn, Fade.sFADE_OUT_EFFECT_GRADATIVE);

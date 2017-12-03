@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using ColorLandUWP;
+using ColorLandUWP.Common;
 
 namespace ColorLand
 {
@@ -52,7 +53,7 @@ namespace ColorLand
         private MTimer mTimer;
         private MTimer mTimerBlinkText;
 
-        private MouseState oldStateMouse;
+        private ProxyMouseState oldStateMouse;
 
         public SplashScreen()
         {
@@ -163,8 +164,7 @@ namespace ColorLand
         private void updateMouseInput()
         {
 
-            MouseState mouseState = Mouse.GetState();
-
+            var mouseState = Game1.getMousePosition();
 
             if (mouseState.LeftButton == ButtonState.Pressed)
             {

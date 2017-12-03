@@ -1,4 +1,5 @@
 ﻿using ColorLand;
+using ColorLandUWP.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -27,24 +28,32 @@ namespace ColorLandUWP
 
         //Original structure
         private static Game1 instance;
+
+        private static Tuple<Vector2, Vector2> displayTransform;
+
         ScreenManager mScreenManager;
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        RenderTarget2D target;
 
 
         public Game1()
         {
             progressObject = ExtraFunctions.loadProgress();
 
+
             graphics = new GraphicsDeviceManager(this);
 
             Content.RootDirectory = "Content";
 
-            //* Frame rate is 30 fps by default for Windows Phone.
             TargetElapsedTime = TimeSpan.FromTicks(333333);
 
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
+            //graphics.PreferredBackBufferWidth = sSCREEN_RESOLUTION_WIDTH;
+            //graphics.PreferredBackBufferHeight = sSCREEN_RESOLUTION_HEIGHT;
+            //graphics.ApplyChanges();
+            //graphics.GraphicsDevice.Clear(Color.Black);            
 
             mScreenManager = new ScreenManager(this);
 
@@ -63,26 +72,17 @@ namespace ColorLandUWP
             {
                 // KinectManager.getInstance().init();
             }
-#if WINDOWS_PHONE
-            graphics.PreferredBackBufferHeight = 480;
-            graphics.PreferredBackBufferWidth = 800; 
-#else
-            graphics.PreferredBackBufferWidth = sSCREEN_RESOLUTION_WIDTH;
-            graphics.PreferredBackBufferHeight = sSCREEN_RESOLUTION_HEIGHT;
-#endif
-            graphics.ApplyChanges();
-            graphics.GraphicsDevice.Clear(Color.Black);
-
 
             base.Initialize();
-
-
-
+            IsMouseVisible = false;
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            target = new RenderTarget2D(GraphicsDevice, sSCREEN_RESOLUTION_WIDTH, sSCREEN_RESOLUTION_HEIGHT);
+            //displayTransform = GetDisplayTransform(new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), new Vector2(sSCREEN_RESOLUTION_WIDTH, sSCREEN_RESOLUTION_HEIGHT));
+            displayTransform = GetDisplayTransform(new Vector2(GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height), new Vector2(sSCREEN_RESOLUTION_WIDTH, sSCREEN_RESOLUTION_HEIGHT));
         }
 
         public static Game1 getInstance()
@@ -137,22 +137,15 @@ namespace ColorLandUWP
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            graphics.GraphicsDevice.Clear(Color.Black);
-
-            SpriteBatch targetBatch = new SpriteBatch(GraphicsDevice);
-            RenderTarget2D target = new RenderTarget2D(GraphicsDevice, sSCREEN_RESOLUTION_WIDTH, sSCREEN_RESOLUTION_HEIGHT);
             GraphicsDevice.SetRenderTarget(target);
             base.Draw(gameTime);
             //set rendering back to the back buffer
             GraphicsDevice.SetRenderTarget(null);
 
-            var result = GetDisplayTransform(new Vector2(GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height), new Vector2(sSCREEN_RESOLUTION_WIDTH, sSCREEN_RESOLUTION_HEIGHT));
-
             //render target to back buffer
-            targetBatch.Begin();
-            targetBatch.Draw(target, new Rectangle((int)result.Item2.X,(int) result.Item2.Y, (int)(sSCREEN_RESOLUTION_WIDTH*result.Item1.X), (int)(sSCREEN_RESOLUTION_HEIGHT * result.Item1.Y)), Color.White);
-            targetBatch.End();
+            spriteBatch.Begin();
+            spriteBatch.Draw(target, new Rectangle((int)displayTransform.Item2.X,(int)displayTransform.Item2.Y, (int)(sSCREEN_RESOLUTION_WIDTH* displayTransform.Item1.X), (int)(sSCREEN_RESOLUTION_HEIGHT * displayTransform.Item1.Y)), Color.White);
+            spriteBatch.End();
         }
 
         protected override void Update(GameTime gameTime)
@@ -170,6 +163,20 @@ namespace ColorLandUWP
         {
             //System.Diagnostics.Debug.WriteLine(message);
             Debug.WriteLine(message);
+        }
+
+        public static ProxyMouseState getMousePosition()
+        {
+            MouseState state = Mouse.GetState();
+            ProxyMouseState proxyState = new ProxyMouseState();
+            if (displayTransform != null)
+            {
+                proxyState.X = (int)(state.X / displayTransform.Item1.X);
+                proxyState.Y = (int)(state.Y / displayTransform.Item1.Y);
+            }
+            proxyState.LeftButton = state.LeftButton;
+            proxyState.RightButton = state.RightButton;
+            return proxyState;
         }
 
     }

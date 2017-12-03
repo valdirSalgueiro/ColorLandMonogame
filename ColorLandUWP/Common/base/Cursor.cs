@@ -112,7 +112,7 @@ namespace ColorLand
             {
                 //if (mCanMove)
                 //{
-                    MouseState mouseState = Mouse.GetState();
+                    var mouseState = Game1.getMousePosition();
                     //setCenter(mouseState.X, mouseState.Y);
                     setLocation(mouseState.X + GamePlayScreen.sCURRENT_STAGE_X_PROGRESSIVE, mouseState.Y); //half half image
                     //setLocation(mouseState.X - 40, mouseState.Y - 40); //half half image
@@ -285,7 +285,7 @@ namespace ColorLand
         {
             if (getCurrentSprite() == mSpriteNormal)
             {
-                MouseState mouseState = Mouse.GetState();
+                var mouseState = Game1.getMousePosition();
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
@@ -314,7 +314,7 @@ namespace ColorLand
             }
             else
             {
-                MouseState mouseState = Mouse.GetState();
+                var mouseState = Game1.getMousePosition();
 
                 if (mouseState.RightButton == ButtonState.Pressed)
                 {

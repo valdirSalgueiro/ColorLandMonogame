@@ -326,15 +326,9 @@ namespace ColorLand
         public void updateHand()
         {
             //cursor.getLocation()
-            Vector2 directionRightHand = new Vector2(Mouse.GetState().X,Mouse.GetState().Y) - new Vector2(mX + 100, mY + 100);
+            Vector2 directionRightHand = new Vector2(Game1.getMousePosition().X,Game1.getMousePosition().Y) - new Vector2(mX + 100, mY + 100);
             float angleHandCursor = (float)(Math.Atan2(directionRightHand.Y, directionRightHand.X));
             mRightHandAngle = angleHandCursor;
-
-            /*if( !(Mouse.GetState().Y > mY + 90 && (Mouse.GetState().X > mX-125 && Mouse.GetState().X < mX + 230))){
-                mRightHandAngle = angleHandCursor;
-            }else{
-                
-            }*/
                         
         }
 

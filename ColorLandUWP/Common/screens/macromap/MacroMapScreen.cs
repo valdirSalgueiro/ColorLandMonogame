@@ -1,4 +1,5 @@
 ﻿using ColorLandUWP;
+using ColorLandUWP.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -55,7 +56,7 @@ namespace ColorLand
         private bool mShowTextClickToStart;
         private bool mClicked; //ready to go to advance
 
-        private MouseState oldStateMouse;
+        private ProxyMouseState oldStateMouse;
 
         //fade
         private Fade mFade;
@@ -498,7 +499,7 @@ namespace ColorLand
         public override void update(GameTime gameTime)
         {
 
-            Vector2 direction = new Vector2(Mouse.GetState().X, Mouse.GetState().Y) - new Vector2(400, 0);
+            Vector2 direction = new Vector2(Game1.getMousePosition().X, Game1.getMousePosition().Y) - new Vector2(400, 0);
             angleBussola = (float)(Math.Atan2(direction.Y, direction.X));
 
             mCursor.update(gameTime);
@@ -651,8 +652,8 @@ namespace ColorLand
 
         private void updateMouseInput()
         {
-            
-            MouseState ms = Mouse.GetState();
+
+            var ms = Game1.getMousePosition();
 
             if (ms.LeftButton == ButtonState.Pressed)
             {
@@ -674,7 +675,7 @@ namespace ColorLand
             }
 
 
-            MouseState mouseState = Mouse.GetState();
+            var mouseState = Game1.getMousePosition();
 
 
             if (mouseState.LeftButton == ButtonState.Pressed)
